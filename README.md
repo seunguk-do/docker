@@ -4,8 +4,8 @@
 ```
 ./scripts/build_image [image_name] [version]
 ```
-- Image_name should be selected from the directory "dockerfiles"
-- Version should be selected among the versions available in the base image
+- [image_name] should be selected from the directory "dockerfiles"
+- [version] should be selected among the versions available in the base image
 
 ## Run Container
 ```
