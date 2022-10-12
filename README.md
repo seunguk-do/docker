@@ -1,4 +1,4 @@
-# CUDA - repository for dockerfiles and scripts
+# docker - repository for dockerfiles and scripts
 
 ## Build Image
 ```
