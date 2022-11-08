@@ -27,14 +27,6 @@ RUN git clone https://github.com/universal-ctags/ctags.git && \
     make && make install && \
     cd .. && rm -rf ctags
 
-# Install miniconda
-ENV PATH="/opt/miniconda3/bin:${PATH}"
-ARG PATH="/opt/miniconda3/bin:${PATH}"
-
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    sh Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3 && \
-    rm -f Miniconda3-latest-Linux-x86_64.sh
-
 RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" && \
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && \
@@ -77,3 +69,11 @@ WORKDIR /home/$USER
 RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
     --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' && \
     nvim +PlugInstall +qall
+
+# Install micromamba
+ENV PATH="/opt/miniconda3/bin:${PATH}"
+ARG PATH="/opt/miniconda3/bin:${PATH}"
+
+RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+
+RUN ./bin/micromamba shell init -s zsh -p ~/micromamba
