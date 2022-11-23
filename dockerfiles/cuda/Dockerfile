@@ -19,6 +19,10 @@ RUN apt-get update && apt-get install -y \
     sudo zsh git wget curl vim tmux neovim htop ffmpeg libsm6 libxext6 tzdata \
     unzip autoconf automake pkg-config
 
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh && \
+    bash /tmp/nodesource_setup.sh
+RUN apt-get install nodejs
+
 # Install ctags
 RUN git clone https://github.com/universal-ctags/ctags.git && \
     cd ctags && \
@@ -35,9 +39,9 @@ RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 
 # Copy config files
 COPY .tmux.conf /root/
-COPY init.vim /root/.config/nvim/init.vim
 COPY .p10k.zsh /root/
 COPY .zshrc /root/
+COPY nvim /root/.config/nvim/
 
 # Install tmux plugins
 RUN mkdir -p /root/.tmux/plugins && \
@@ -65,15 +69,6 @@ RUN chown -R $USER:$USER /home/$USER/.oh-my-zsh && \
 USER $USER
 WORKDIR /home/$USER
 
-# Install neovim plugins
-RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
-    --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' && \
-    nvim +PlugInstall +qall
-
 # Install micromamba
-ENV PATH="/opt/miniconda3/bin:${PATH}"
-ARG PATH="/opt/miniconda3/bin:${PATH}"
-
 RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-
 RUN ./bin/micromamba shell init -s zsh -p ~/micromamba
