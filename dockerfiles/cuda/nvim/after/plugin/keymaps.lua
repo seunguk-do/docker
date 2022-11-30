@@ -14,6 +14,15 @@ keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, sil
 -- jk to ESC
 keymap("i", "jk", "<ESC>", { noremap = true, silent = true })
 
+-- buffer
+keymap("n", "<leader>T", ":enew<cr>")
+keymap("n", "<leader>l", ":bnext<CR>")
+keymap("n", "<leader>h", ":bprevious<CR>")
+keymap("n", "<leader>bq", ":bp <BAR> bd #<CR>")
+
+-- FuzzyFinder
+keymap("n", "<leader>t", ":Files<cr>")
+
 local keys = {
   ['cr']        = vim.api.nvim_replace_termcodes('<CR>', true, true, true),
   ['ctrl-y']    = vim.api.nvim_replace_termcodes('<C-y>', true, true, true),

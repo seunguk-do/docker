@@ -88,6 +88,10 @@ local function plugins(use)
 	})
 	use({ "nvim-treesitter/playground" })
 
+  -- Fuzzy Finder
+  use { "junegunn/fzf", run = "./install --all" }
+  use { "junegunn/fzf.vim" }
+
 	-- Bootstrap Neovim
 	if packer_bootstrap then
 		print("Neovim restart is required after installation!")
