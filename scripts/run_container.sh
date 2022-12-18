@@ -2,14 +2,14 @@
 container_name=$1
 image=$2
 version=$3
-code_dir=$4
-data_dir=$5
+workspace_dir=$4
+dataset_dir=$5
 user=$USER
 echo "containe_name: $container_name"
 echo "image: $image"
 echo "version: $version"
-echo "code_dir: $code_dir"
-echo "data_dir: $data_dir"
+echo "workspace_dir: $workspace_dir"
+echo "dataset_dir: $dataset_dir"
 echo "user: $user"
 docker run \
 	-it \
@@ -18,10 +18,10 @@ docker run \
 	--gpus=all \
 	--ipc=host \
 	--net=host \
-	--shm-size=504g \
-	-v $code_dir:/home/$user/codes \
-	-v $data_dir:/home/$user/data \
+	--shm-size=512gb \
+	-v $workspace_dir:/home/$user/workspace \
+	-v $dataset_dir:/home/$user/dataset \
+	-v $HOME/.ssh:/home/$user/.ssh \
 	--workdir=/home/$user \
 	$image:$version \
 	zsh
-
