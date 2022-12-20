@@ -21,6 +21,5 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 POWERLEVEL9K_STATUS_OK=false
 POWERLEVEL9K_STATUS_CROSS=true
 
-# Execution
 source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
