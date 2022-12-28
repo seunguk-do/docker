@@ -21,7 +21,8 @@ RUN apt-get update && \
 
 # Install nodejs
 RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh && \
-    bash /tmp/nodesource_setup.sh
+    bash /tmp/nodesource_setup.sh && \
+    apt-get install -y nodejs
 
 # Install ctags
 RUN git clone https://github.com/universal-ctags/ctags.git && \
