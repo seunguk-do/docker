@@ -8,4 +8,5 @@ docker build \
 	-t $USER/$1:$2 \
 	--build-arg USER=$USER \
 	--build-arg UID=$(id -u $USER) \
-	./dockerfiles/$1/$2
+	--build-arg VERSION=$2 \
+	./dockerfiles/$1
