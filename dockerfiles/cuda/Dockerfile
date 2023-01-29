@@ -18,7 +18,7 @@ RUN apt-get update && \
     apt-get update && apt-get upgrade -y && \
     apt-get install -y \
     sudo zsh git wget curl vim tmux neovim htop ffmpeg libsm6 libxext6 tzdata \
-    unzip autoconf automake pkg-config
+    unzip autoconf automake pkg-config build-essential
 
 # Install nodejs
 RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh && \
