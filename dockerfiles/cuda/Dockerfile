@@ -18,16 +18,21 @@ RUN apt-get update && \
     apt-get update && apt-get upgrade -y && \
     apt-get install -y \
     sudo zsh git wget curl vim tmux neovim htop ffmpeg libsm6 libxext6 tzdata \
-    unzip autoconf automake pkg-config build-essential
+    unzip autoconf automake pkg-config build-essential libssl-dev liblzma-dev \
+    bzip2 libncurses5-dev libncursesw5-dev libffi-dev sqlite3 zlib1g-dev \
+    libsqlit3-dev libffi-dev libbz2-dev libreadline-dev
+
+# Fix locale error
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y locales \
+    && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
+    && update-locale LANG=en_US.UTF-8
 
 # Install nodejs
 RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh && \
     bash /tmp/nodesource_setup.sh && \
     apt-get install -y nodejs
-
-# Install Bottom
-RUN curl -LO https://github.com/ClementTsang/bottom/releases/download/0.6.8/bottom_0.6.8_amd64.deb && \
-    sudo dpkg -i bottom_0.6.8_amd64.deb
 
 USER $USER
 WORKDIR /home/$USER
@@ -46,6 +51,5 @@ COPY --chown=$USER:$USER dotfiles/.p10k.zsh /home/$USER/
 COPY --chown=$USER:$USER dotfiles/.zshrc /home/$USER/
 COPY --chown=$USER:$USER dotfiles/nvim /home/$USER/.config/nvim/
 
-# Install micromamba
-RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba && \
-    ./bin/micromamba shell init -s zsh -p ~/micromamba
+# Install pyenv
+RUN curl https://pyenv.run | bash

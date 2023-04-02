@@ -24,5 +24,6 @@ docker run \
 	-v $data_dir:/home/$user/Data \
 	-v $HOME/.ssh:/home/$user/.ssh \
 	--workdir=/home/$user \
+	--privileged \
 	$user/$image:$version \
 	zsh
