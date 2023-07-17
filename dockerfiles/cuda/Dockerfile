@@ -14,7 +14,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Install basic programs
 RUN apt-get update && \
   apt-get install -y software-properties-common && \
-  add-apt-repository ppa:neovim-ppa/unstable && \
+  add-apt-repository ppa:neovim-ppa/stable && \
   apt-get update && apt-get upgrade -y && \
   apt-get install -y \
   sudo zsh git wget curl vim tmux neovim htop ffmpeg libsm6 libxext6 tzdata \
