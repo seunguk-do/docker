@@ -23,6 +23,7 @@ ENV ZSH_CUSTOM=/home/user/.oh-my-zsh/custom
 
 # Install required apt packages and clear cache afterwards.
 RUN apt-get update
+RUN apt-get install -y --no-install-recommends tzdate
 RUN apt-get install -y --no-install-recommends build-essential
 RUN apt-get install -y --no-install-recommends cmake
 RUN apt-get install -y --no-install-recommends curl
