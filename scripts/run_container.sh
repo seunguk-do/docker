@@ -5,6 +5,7 @@ PWD=$(pwd -P)
 docker run \
 	-it \
 	--gpus all \
+	--hostname seunguk_dev \
 	--name seunguk_dev \
 	--shm-size 512G \
 	--volume $HOME/projects:/home/seunguk/projects \
