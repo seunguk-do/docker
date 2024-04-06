@@ -1,0 +1,32 @@
+# environment variables
+## Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+## PIPENV_VENV_IN_PROJECT
+export PIPENV_VENV_IN_PROJECT=1
+## Set language environment
+export LANG=en_US.UTF-8
+
+# Aliases
+alias vim="nvim"
+
+# Set name of the theme to load
+ZSH_THEME="spaceship"
+
+# Time zone
+TZ='Asia/Seoul'
+
+# Specify the plugins to use
+plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# Functions
+function switch_cuda {
+  v=$1
+  sudo ln -sfT /usr/local/cuda-$v/ /usr/local/cuda
+  nvcc --version
+}

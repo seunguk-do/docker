@@ -1,1 +1,3 @@
-cuda_installers/*
+/cuda/*
+/cudnn/*
+/dotfiles/tmux/plugins/*

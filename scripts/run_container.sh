@@ -6,15 +6,13 @@ docker run \
 	-it \
 	--gpus all \
 	--name seunguk_dev \
-	--shm-size 32G \
-	--volume $HOME/projects:/home/user/projects \
-	--volume /data0/seunguk/:/home/user/data \
-	--volume $PWD/dotfiles/.zshrc:/home/user/.zshrc \
-	--volume $PWD/dotfiles/.tmux.conf:/home/user/.tmux.conf \
-	--volume $PWD/dotfiles/nvim:/home/user/.config/nvim \
-	--volume $HOME/miniconda3/envs:/home/user/conda/envs \
+	--shm-size 512G \
+	--volume $HOME/projects:/home/seunguk/projects \
+	--volume /data0/seunguk/:/home/seunguk/data \
+	--volume $PWD/dotfiles/zshrc:/home/seunguk/.zshrc \
+	--volume $PWD/dotfiles/tmux:/home/seunguk/.config/tmux \
+	--volume $PWD/dotfiles/nvim:/home/seunguk/.config/nvim \
 	-p 7777:7777 \
-	-p 8888:8888 \
 	-p 9999:9999 \
 	seunguk/cuda_dev \
 	zsh
