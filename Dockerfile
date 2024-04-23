@@ -42,6 +42,12 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN python3.10 -m pip install pipenv nvitop
 
+# Install LazyGit
+RUN LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*') && \
+    curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+RUN tar xf lazygit.tar.gz lazygit
+RUN sudo install lazygit /usr/local/bin && rm lazygit.tar.gz lazygit
+
 ## Install NodeJS
 RUN mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
